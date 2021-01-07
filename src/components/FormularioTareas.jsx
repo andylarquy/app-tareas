@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import{ Prioridades} from '../utils/enumPrioridades'
 import  '../estilos/FormularioTareas.css'
 
+//REDUX
+import store, { AGREGAR_TAREA } from '../redux/store'
+
 export default class FormularioTareas extends Component {
 
         state = {
@@ -24,7 +27,16 @@ export default class FormularioTareas extends Component {
     
     onSubmit = e => { 
         e.preventDefault()
-        this.props.agregarTarea(this.state)
+        this.agregarTarea(this.state)
+    }
+
+    // TODO: Si estas haciendo trampa te invito a agregar una validacion
+    // para que no te deje crear tareas con campos vacios
+    agregarTarea(tarea){
+        store.dispatch({
+            type: AGREGAR_TAREA,
+            tarea: tarea,
+        })
     }
 
     render() {
