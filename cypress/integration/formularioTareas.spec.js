@@ -10,23 +10,23 @@ describe('Formulario Tareas Suite', () => {
         })
 
         it('Se muestra el formulario para agregar una tarea nueva', () => {
-            getByTestId('data-testid=formulario-titulo')
+            getByTestId('formulario-titulo')
         })
 
         it('El selector de prioridades no puede ser nulo', () => {
-            getByTestId('data-testid=formulario-prioridades-selector').find('option').then(options => {
+            getByTestId('formulario-prioridades-selector').find('option').then(options => {
                 const selectValues = [...options].map(o => o.value)
                 expect(selectValues).to.deep.eq(['Baja', 'Media', 'Alta'])
               })
         });
 
         it("El selector de prioridades por defecto aparece en 'Baja' ", () => {
-            getByTestId('data-testid=formulario-prioridades-selector').contains('Baja')
+            getByTestId('formulario-prioridades-selector').contains('Baja')
         });
 
         describe('Si hacemos click en guardar', () => {
 
-            const clickEnGuardar = () => getByTestId('data-testid=formulario-guardar-button').click()
+            const clickEnGuardar = () => getByTestId('formulario-guardar-button').click()
             beforeEach(() => {
                 clickEnGuardar()
             })
@@ -37,7 +37,7 @@ describe('Formulario Tareas Suite', () => {
 
             describe('Si ademas ingresamos un titulo y luego guardamos', () => {
                 beforeEach(() => {
-                    getByTestId('data-testid=formulario-titulo-input').type('Titulo')
+                    getByTestId('formulario-titulo-input').type('Titulo')
                     clickEnGuardar()
                 })
 
@@ -47,7 +47,7 @@ describe('Formulario Tareas Suite', () => {
 
                 describe('Si ademas ingresamos un responsable y luego guardamos', () => {
                     beforeEach(() => {
-                        getByTestId('data-testid=formulario-responsable-input').type('Responsable')
+                        getByTestId('formulario-responsable-input').type('Responsable')
                         clickEnGuardar()
                     })
 
@@ -57,7 +57,7 @@ describe('Formulario Tareas Suite', () => {
 
                     describe('Si ademas ingresamos una descripcion y luego guardamos', () => {
                         beforeEach(() => {
-                            getByTestId('data-testid=formulario-descripcion-input').type('Descripcion')
+                            getByTestId('formulario-descripcion-input').type('Descripcion')
                             clickEnGuardar()
                         })
     
@@ -68,9 +68,9 @@ describe('Formulario Tareas Suite', () => {
                         })
 
                         it('El sistema genera una nueva tarea', () => {
-                            getByTestId('data-testid=tarea-titulo').contains('Titulo')
-                            getByTestId('data-testid=tarea-responsable').contains('Responsable')
-                            getByTestId('data-testid=tarea-descripcion').contains('Descripcion')
+                            getByTestId('tarea-titulo').contains('Titulo')
+                            getByTestId('tarea-responsable').contains('Responsable')
+                            getByTestId('tarea-descripcion').contains('Descripcion')
                         });
                     })
                 })
