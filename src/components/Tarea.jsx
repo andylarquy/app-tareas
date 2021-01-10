@@ -44,7 +44,7 @@ export default class Tarea extends Component {
                             className="form-check-input"
                             type="checkbox"
                             value=""
-                            onChange={() => {this.actualizarTarea(tarea)}}
+                            onChange={() => {this.realizarTarea(tarea)}}
                            >
 
                         </input>
@@ -56,9 +56,7 @@ export default class Tarea extends Component {
 
 
                         <button className="btn btn-danger"
-                            onClick={() => {
-                                console.log('Elimina')
-                                this.eliminarTarea(tarea)}
+                            onClick={() => {this.eliminarTarea(tarea)}
                             }
                         >Borrar</button>
                     </div>
@@ -79,7 +77,7 @@ export default class Tarea extends Component {
         })
     }
 
-    actualizarTarea(tarea){
+    realizarTarea(tarea){
         store.dispatch({
             type: REALIZAR_TAREA,
             tarea: tarea,

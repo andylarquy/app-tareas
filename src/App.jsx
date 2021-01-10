@@ -1,5 +1,4 @@
 import './App.css';
-import { tareas } from './tareas.json'
 
 //REACT
 
