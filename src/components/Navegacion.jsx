@@ -39,7 +39,7 @@ export default class Navegacion extends Component {
 
                         <div className="mis-tareas">{this.props.titulo}</div>
                         
-                        <div className="contador badge badge-pill badge-light">{this.cantidadDeTareas()}</div>
+                        <div className="contador badge badge-pill badge-light" data-testid="navbar-cantidad-de-tareas">{this.cantidadDeTareas()}</div>
                         </div>
                         
                     </div>

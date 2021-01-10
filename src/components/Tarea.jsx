@@ -15,9 +15,6 @@ export default class Tarea extends Component {
     }
 
     render() {
-
-        //DESTRUCTURING
-
         const { tarea } = this.props
 
         return (
@@ -26,17 +23,17 @@ export default class Tarea extends Component {
 
                 <div className="card tarea-item">
                     <div className="card-header text-center">
-                        <h3>{tarea.titulo}</h3>
+                        <h3 data-testid="tarea-titulo">{tarea.titulo}</h3>
 
-                        <span className="badge rounded-pill bg-primary text-light">
+                        <span className="badge rounded-pill bg-primary text-light" data-testid="tarea-prioridad">
                             {tarea.prioridad}
                         </span>
                     </div>
 
                     <div className="card-body text-center">
 
-                        <p>{tarea.descripcion}</p>
-                        <b> {tarea.responsable}</b>
+                        <p data-testid="tarea-descripcion">{tarea.descripcion}</p>
+                        <b data-testid="tarea-responsable"> {tarea.responsable}</b>
                     </div>
 
                     <div className="form-check text-center">
@@ -44,8 +41,9 @@ export default class Tarea extends Component {
                             className="form-check-input"
                             type="checkbox"
                             value=""
-                            onChange={() => {this.realizarTarea(tarea)}}
-                           >
+                            onChange={() => { this.realizarTarea(tarea) }}
+                            data-testid="tarea-realizar-checkbox"
+                        >
 
                         </input>
                         <label className="form-check-label"></label>
@@ -56,8 +54,9 @@ export default class Tarea extends Component {
 
 
                         <button className="btn btn-danger"
-                            onClick={() => {this.eliminarTarea(tarea)}
+                            onClick={() => { this.eliminarTarea(tarea) }
                             }
+                            data-testid="tarea-borrar-button"
                         >Borrar</button>
                     </div>
 
@@ -77,7 +76,7 @@ export default class Tarea extends Component {
         })
     }
 
-    realizarTarea(tarea){
+    realizarTarea(tarea) {
         store.dispatch({
             type: REALIZAR_TAREA,
             tarea: tarea,
