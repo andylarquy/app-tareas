@@ -63,7 +63,7 @@ class FormularioTareas extends Component {
                 <div className="card formulario-tareas">
 
                     <div className="card-header">
-                        <h4>Agregar tarea nueva</h4>
+                        <h4 data-testid="formulario-titulo">Agregar tarea nueva</h4>
                     </div>
 
                     <form className="card-body" onSubmit={onSubmit} >
