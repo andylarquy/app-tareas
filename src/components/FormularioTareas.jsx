@@ -5,7 +5,11 @@ import '../estilos/FormularioTareas.css'
 //REDUX
 import store, { AGREGAR_TAREA } from '../redux/store'
 
-export default class FormularioTareas extends Component {
+//SNACKBAR
+import { withSnackbar } from 'react-simple-snackbar'
+import { ErrorSnackbar, errorSnackbarStyle } from '../utils/Snackbar'
+
+class FormularioTareas extends Component {
 
     state = {
         titulo: '',
@@ -14,31 +18,44 @@ export default class FormularioTareas extends Component {
         prioridad: 'baja'
     }
 
-    //Las funciones flecha evitan tener que usar el metodo ".bind"
-
-    onChange = e => {
-        const { value, name } = e.target
-        this.setState({
-            [name]: value
-
-        })
-
-    }
-
-    onSubmit = e => {
-        e.preventDefault()
-        this.agregarTarea(this.state)
-    }
-
-    agregarTarea(tarea) {
-        store.dispatch({
-            type: AGREGAR_TAREA,
-            tarea: tarea,
-        })
-    }
-
     render() {
+        const { openSnackbar } = this.props
 
+        const onChange = e => {
+            const { value, name } = e.target
+            this.setState({
+                [name]: value
+
+            })
+
+        }
+
+        const onSubmit = e => {
+            e.preventDefault()
+            try {
+                validarTarea(this.state)
+                agregarTarea(this.state)
+            } catch (error) {
+                openSnackbar(ErrorSnackbar(error), 2000)
+            }
+        }
+
+        const validarTarea = tarea => {
+
+            const check = (atributo, errorMessage) => { if (!atributo) throw errorMessage }
+
+            check(tarea.titulo, 'La tarea debe tener un titulo')
+            check(tarea.responsable, 'La tarea debe tener un responsable')
+            check(tarea.descripcion, 'La tarea debe tener una descripcion')
+            check(tarea.prioridad, 'La tarea debe tener una prioridad')
+        }
+
+        const agregarTarea = tarea => {
+            store.dispatch({
+                type: AGREGAR_TAREA,
+                tarea: tarea,
+            })
+        }
 
         return (
             <div className="formulario-tareas-container">
@@ -49,14 +66,14 @@ export default class FormularioTareas extends Component {
                         <h4>Agregar tarea nueva</h4>
                     </div>
 
-                    <form className="card-body" onSubmit={this.onSubmit} >
+                    <form className="card-body" onSubmit={onSubmit} >
                         <div className="form-group" >
                             <input
                                 type="text"
                                 name="titulo"
                                 className="form-control"
                                 placeholder="Título"
-                                onChange={this.onChange}
+                                onChange={onChange}
                                 value={this.state.titulo}
                                 data-testid="formulario-titulo-input"
                             />
@@ -68,7 +85,7 @@ export default class FormularioTareas extends Component {
                                 name="responsable"
                                 className="form-control"
                                 placeholder="Responsable"
-                                onChange={this.onChange}
+                                onChange={onChange}
                                 value={this.state.responsable}
                                 data-testid="formulario-responsable-input"
                             />
@@ -80,7 +97,7 @@ export default class FormularioTareas extends Component {
                                 name="descripcion"
                                 className="form-control"
                                 placeholder="Descripción"
-                                onChange={this.onChange}
+                                onChange={onChange}
                                 value={this.state.descripcion}
                                 data-testid="formulario-descripcion-input"
                             />
@@ -91,7 +108,7 @@ export default class FormularioTareas extends Component {
                                 className="form-control"
                                 id="exampleFormControlSelect1"
                                 name="prioridad"
-                                onChange={this.onChange}
+                                onChange={onChange}
                                 value={this.state.prioridad}
                                 data-testid="formulario-prioridades-selector"
                             >
@@ -116,5 +133,6 @@ export default class FormularioTareas extends Component {
             </div>
         )
     }
-
 }
+
+export default withSnackbar(FormularioTareas, { style: errorSnackbarStyle })
