@@ -56,9 +56,7 @@ export default class Tarea extends Component {
 
 
                         <button className="btn btn-danger"
-                            onClick={() => {
-                                console.log('Elimina')
-                                this.eliminarTarea(tarea)}
+                            onClick={() => {this.eliminarTarea(tarea)}
                             }
                         >Borrar</button>
                     </div>
@@ -75,6 +73,7 @@ export default class Tarea extends Component {
     eliminarTarea(tarea) {
         store.dispatch({
             type: ELIMINAR_TAREA,
+<<<<<<< HEAD
             tarea: tarea,
         })
     }
@@ -82,7 +81,16 @@ export default class Tarea extends Component {
     actualizarTarea(tarea){
         store.dispatch({
             type: REALIZAR_TAREA,
+=======
+>>>>>>> upstream/main
             tarea: tarea,
+        })
+    }
+
+    actualizarTarea(tarea){
+        store.dispatch({
+            type: REALIZAR_TAREA,
+            tarea:tarea
         })
     }
 

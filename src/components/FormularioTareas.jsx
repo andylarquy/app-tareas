@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import{ Prioridades} from '../utils/enumPrioridades'
 import  '../estilos/FormularioTareas.css'
+import store, { AGREGAR_TAREA } from '../redux/store'
+
 
 //REDUX
 import store, { AGREGAR_TAREA } from '../redux/store'
@@ -30,8 +32,6 @@ export default class FormularioTareas extends Component {
         this.agregarTarea(this.state)
     }
 
-    // TODO: Si estas haciendo trampa te invito a agregar una validacion
-    // para que no te deje crear tareas con campos vacios
     agregarTarea(tarea){
         store.dispatch({
             type: AGREGAR_TAREA,
@@ -101,7 +101,9 @@ export default class FormularioTareas extends Component {
                         </div>
                     
                         <div className= "boton-guardar">
-                            <button type="submit" className="btn btn-primary">
+                            <button 
+                            ype="submit" 
+                            className="btn btn-primary">
                                 Guardar
                             </button>
                         </div>
