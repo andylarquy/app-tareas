@@ -21,7 +21,7 @@ export default class Tarea extends Component {
             <div>
 
 
-                <div className="card tarea-item">
+                <div className="card tarea-item" data-testid='tarea-card'>
                     <div className="card-header text-center">
                         <h3 data-testid="tarea-titulo">{tarea.titulo}</h3>
 

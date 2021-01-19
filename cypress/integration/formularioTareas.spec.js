@@ -27,6 +27,7 @@ describe('Formulario Tareas Suite', () => {
         describe('Si hacemos click en guardar', () => {
 
             const clickEnGuardar = () => getByTestId('formulario-guardar-button').click()
+            const clickEnBorrar = () => getByTestId('tarea-borrar-button').first().click()
             beforeEach(() => {
                 clickEnGuardar()
             })
@@ -72,9 +73,35 @@ describe('Formulario Tareas Suite', () => {
                             getByTestId('tarea-responsable').contains('Responsable')
                             getByTestId('tarea-descripcion').contains('Descripcion')
                         });
+
+                        
+
+                            /* it('Borrar el campo descripcion y verificar que este vacia',()=>{
+                                getByTestId('tarea-descripcion').type('descripcion')
+                                getByTestId('tarea-descripcion').clear()
+                                getByTestId('tarea-descripcion').should('have.value', '');
+                            })*/
+
+                            it('Borrar el campo descripcion y verificar que este vacia',()=>{
+                                getByTestId('tarea-card').should('have.length',6);
+                                clickEnBorrar()
+                                getByTestId('tarea-card').should('have.length',5);
+                            })
+
+                            it('Marcar tarea como hecha',()=>{
+                                getByTestId('tarea-realizar-checkbox').eq(2).check()
+                                getByTestId('tarea-realizar-checkbox').should('be.checked')
+
+                            })
+
+                            it('Contar cantidad de tareas',()=>{
+                                getByTestId('tarea-card').should('have.length',6);
+                                clickEnBorrar()
+                                getByTestId('tarea-card').should('have.length',5);
+                            })
+                        })
                     })
                 })
             })
         })
     })
-})
